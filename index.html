@@ -9,43 +9,54 @@
             font-family: Arial, sans-serif;
             text-align: center;
             margin-top: 50px;
+            background-color: #f0f0f0;
         }
-
         #message {
             font-size: 24px;
             color: #333;
+            margin-top: 50px;
+        }
+        #instructions {
+            font-size: 18px;
+            color: #555;
+            margin-top: 20px;
+        }
+        .hidden {
+            display: none;
         }
     </style>
 </head>
 <body>
-    <div id="message">Touch the screen and wait for it...</div>
+    <div id="message">Touch the screen to start the prank...</div>
+    <div id="instructions" class="hidden">Please wait 30 seconds while we prank your phone...</div>
 
     <script>
-        // Function to disable touch events for 30 seconds
-        function disableTouch() {
-            var startTime = Date.now();
-            var endTime = startTime + 30000; // 30 seconds
+        function disableTouchFor30Seconds() {
+            // Show instructions to the user
+            document.getElementById('instructions').classList.remove('hidden');
+            document.getElementById('message').classList.add('hidden');
 
-            // Disable touch interactions for mobile
+            // Disable touchstart events for 30 seconds (mobile)
             document.body.addEventListener('touchstart', function(event) {
-                event.preventDefault(); // Prevent touch interaction
+                event.preventDefault(); // Disable touch interaction
             }, { passive: false });
 
-            // Optional: Disable mouse interactions for prank effect on desktop too
+            // Disable mouse events (for desktop browsers)
             document.body.addEventListener('mousedown', function(event) {
-                event.preventDefault(); // Prevent mouse interaction
+                event.preventDefault(); // Disable mouse interaction
             }, { passive: false });
 
-            // After 30 seconds, show an alert
+            // Show an alert after 30 seconds
             setTimeout(function() {
                 alert("Gotcha! You couldn't touch the screen for 30 seconds!");
-            }, 30000); // Alert after 30 seconds
+                location.reload(); // Reload the page to reset prank
+            }, 30000); // 30 seconds
+
         }
 
-        // Start prank when the page is loaded
-        window.onload = function() {
-            disableTouch();
-        };
+        // Start the prank when the page is touched
+        document.body.addEventListener('touchstart', disableTouchFor30Seconds);
+        document.body.addEventListener('mousedown', disableTouchFor30Seconds); // In case of mouse
     </script>
 </body>
 </html>
