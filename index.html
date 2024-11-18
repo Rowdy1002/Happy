@@ -21,26 +21,30 @@
     <div id="message">Touch the screen and wait for it...</div>
 
     <script>
-        // Function to disable touch interactions
+        // Function to disable touch events for 30 seconds
         function disableTouch() {
-            // Disable touch events for 30 seconds
             var startTime = Date.now();
             var endTime = startTime + 30000; // 30 seconds
 
-            // Disable touch events during this time
+            // Disable touch interactions for mobile
             document.body.addEventListener('touchstart', function(event) {
                 event.preventDefault(); // Prevent touch interaction
             }, { passive: false });
 
-            // Show an alert after 30 seconds
+            // Optional: Disable mouse interactions for prank effect on desktop too
+            document.body.addEventListener('mousedown', function(event) {
+                event.preventDefault(); // Prevent mouse interaction
+            }, { passive: false });
+
+            // After 30 seconds, show an alert
             setTimeout(function() {
                 alert("Gotcha! You couldn't touch the screen for 30 seconds!");
-            }, 30000); // After 30 seconds
+            }, 30000); // Alert after 30 seconds
         }
 
-        // Start the prank as soon as the page is loaded
+        // Start prank when the page is loaded
         window.onload = function() {
-            disableTouch(); // Disable touch for 30 seconds
+            disableTouch();
         };
     </script>
 </body>
