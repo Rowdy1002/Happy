@@ -3,39 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fake Code Compiler</title>
+    <title>Prank Page</title>
     <style>
-        #progress-bar {
-            width: 100%;
-            background-color: #f3f3f3;
-        }
-        #bar {
-            height: 30px;
-            width: 0;
-            background-color: green;
+        /* Page Styles */
+        body {
+            background-color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
             text-align: center;
+            flex-direction: column;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-around;
+            width: 50%;
+        }
+
+        .option {
+            font-size: 30px;
+            padding: 20px 40px;
+            background-color: #3498db;
             color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .option:hover {
+            transform: scale(1.1);
+        }
+
+        /* Message Animation Styles */
+        .message {
+            font-size: 24px;
+            margin-top: 20px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        /* Fade-in animation */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Thanks Animation */
+        .thanks {
+            font-size: 28px;
+            color: #e74c3c;
+            margin-top: 20px;
+            font-weight: bold;
+            animation: slideUp 2s ease-in-out;
+        }
+
+        /* Slide-up Animation for Thanks */
+        @keyframes slideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
 <body>
-    <h1>Compiling Code...</h1>
-    <div id="progress-bar">
-        <div id="bar">0%</div>
+    <!-- Main Content -->
+    <div class="container">
+        <div class="option" id="boy">Boy</div>
+        <div class="option" id="girl">Girl</div>
     </div>
 
     <script>
-        let width = 0;
-        let id = setInterval(function() {
-            if (width >= 100) {
-                clearInterval(id);
-                document.getElementById("bar").innerHTML = "Compilation Finished!";
-            } else {
-                width++;
-                document.getElementById("bar").style.width = width + "%";
-                document.getElementById("bar").innerHTML = width + "%";
-            }
-        }, 100); // Progress bar increase every 100ms
+        // Event listener for "Boy"
+        document.getElementById("boy").addEventListener("click", function() {
+            document.body.innerHTML = "<h1 class='message'>Bhai Yaha Kya Kar Rha Hai, Tere Maa Baap Tere Bada Aadmi Banney Ka Sapna Dekh Rhe Hai, Tu Yaha Phone Chala Raha Hai</h1>";
+            setTimeout(function() {
+                document.body.innerHTML += "<h2 class='thanks'>Papa Ko Thanks Bolo. Papa Matlab Mera Naam</h2>";
+            }, 2000);
+        });
+
+        // Event listener for "Girl"
+        document.getElementById("girl").addEventListener("click", function() {
+            document.body.innerHTML = "<h1 class='message'>Didi Koi Kaam Dhanda Nahi Hai Kya, Padhai Likhai Karo, Shadi Karke Bachhe Paida Karna Yahi Kaam Karo Gi Kya</h1>";
+            setTimeout(function() {
+                document.body.innerHTML += "<h2 class='thanks'>Papa Ko Thanks Bolo. Papa Matlab Mera Naam</h2>";
+            }, 2000);
+        });
     </script>
 </body>
 </html>
