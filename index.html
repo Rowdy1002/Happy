@@ -9,17 +9,10 @@
             font-family: Arial, sans-serif;
             text-align: center;
             margin-top: 50px;
-            background-color: #f0f0f0;
         }
         #message {
             font-size: 24px;
             color: #333;
-            margin-top: 50px;
-        }
-        #instructions {
-            font-size: 18px;
-            color: #555;
-            margin-top: 20px;
         }
         .hidden {
             display: none;
@@ -27,36 +20,42 @@
     </style>
 </head>
 <body>
-    <div id="message">Touch the screen to start the prank...</div>
+    <div id="message">Touch the screen and wait for it...</div>
     <div id="instructions" class="hidden">Please wait 30 seconds while we prank your phone...</div>
 
     <script>
-        function disableTouchFor30Seconds() {
-            // Show instructions to the user
-            document.getElementById('instructions').classList.remove('hidden');
+        var prankActive = false;
+
+        // Function to block all touch interactions for 30 seconds
+        function disableTouchInteraction() {
+            if (prankActive) return; // If prank is already active, don't start again
+
+            prankActive = true;
+            // Show prank instructions
             document.getElementById('message').classList.add('hidden');
+            document.getElementById('instructions').classList.remove('hidden');
 
-            // Disable touchstart events for 30 seconds (mobile)
+            // Disable touch interaction on mobile for 30 seconds
             document.body.addEventListener('touchstart', function(event) {
-                event.preventDefault(); // Disable touch interaction
+                event.preventDefault(); // Disable touch actions
             }, { passive: false });
 
-            // Disable mouse events (for desktop browsers)
+            // Optionally disable mouse actions too (for testing on desktop)
             document.body.addEventListener('mousedown', function(event) {
-                event.preventDefault(); // Disable mouse interaction
+                event.preventDefault(); // Disable mouse clicks
             }, { passive: false });
 
-            // Show an alert after 30 seconds
+            // After 30 seconds, show alert
             setTimeout(function() {
                 alert("Gotcha! You couldn't touch the screen for 30 seconds!");
-                location.reload(); // Reload the page to reset prank
+                prankActive = false; // Reset prank flag
+                location.reload(); // Reload page to reset
             }, 30000); // 30 seconds
-
         }
 
-        // Start the prank when the page is touched
-        document.body.addEventListener('touchstart', disableTouchFor30Seconds);
-        document.body.addEventListener('mousedown', disableTouchFor30Seconds); // In case of mouse
+        // Trigger the prank when the screen is touched or clicked
+        document.body.addEventListener('touchstart', disableTouchInteraction);
+        document.body.addEventListener('mousedown', disableTouchInteraction); // Mouse click support for desktops
     </script>
 </body>
 </html>
